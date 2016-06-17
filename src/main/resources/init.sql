@@ -1,3 +1,9 @@
+create database issues_system;
+create user 'issues_user' identified by 'issues_user';
+grant all privileges on issues_system.* to 'issues_user';
+
+-- Launch an application here!
+
 insert into users (
    id
   ,blocked
