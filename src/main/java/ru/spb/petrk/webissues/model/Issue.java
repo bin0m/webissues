@@ -1,17 +1,10 @@
 package ru.spb.petrk.webissues.model;
 
-import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import ru.spb.petrk.webissues.issues.Priority;
 import ru.spb.petrk.webissues.issues.Status;
+
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  *
@@ -46,7 +39,10 @@ public class Issue extends AbstractEntity {
     
     @Enumerated(EnumType.STRING)
     @Column(name = "priority")
-    private Priority priority;    
+    private Priority priority;
+
+    @Column(name = "hashtag")
+    private String hashtag;
 
         
     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
@@ -54,58 +50,66 @@ public class Issue extends AbstractEntity {
     public String getTitle() {
         return title;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
     
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
     
     public Date getCreationDate() {
         return creationDate;
     }
-    
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
     public User getCreator() {
         return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
     
     public User getAssignee() {
         return assignee;
     }
-    
-    public Status getStatus() {
-        return status;
-    }
-    
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-    
-    public void setCreator(User creator) {
-        this.creator = creator;
-    }
-    
+
     public void setAssignee(User assignee) {
         this.assignee = assignee;
     }
     
+    public Status getStatus() {
+        return status;
+    }
+
     public void setStatus(Status status) {
         this.status = status;
     }
-    
+
+    public String getHashtag() {
+        return hashtag;
+    }
+
+    public void setHashtag(String hashtag) {
+        this.hashtag = hashtag;
+    }
+
     public Priority getPriority() {
         return priority;
     }
 
     public void setPriority(Priority priority) {
         this.priority = priority;
-    }    
+    }
     
     //</editor-fold>
 

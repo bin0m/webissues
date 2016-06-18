@@ -4,11 +4,11 @@
     Author     : PetrK
 --%>
 
-<%@page import="ru.spb.petrk.webissues.model.Issue"%>
 <%@page import="ru.spb.petrk.webissues.issues.IssuesSearchForm"%>
+<%@page import="ru.spb.petrk.webissues.model.Issue" %>
 <%@page import="ru.spb.petrk.webissues.utils.Constants"%>
-<%@page import="ru.spb.petrk.webissues.utils.ContentHelperImpl"%>
 <%@page import="ru.spb.petrk.webissues.utils.ContentHelper"%>
+<%@page import="ru.spb.petrk.webissues.utils.ContentHelperImpl" %>
 <%@page import="ru.spb.petrk.webissues.utils.MessageCollector"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -118,7 +118,14 @@
                                       class="element text large"
                                       rows="5" cols="60" 
                                       type="text" disabled >${issue != null ? issue.description : ''}</textarea>
-                        </div> 
+                        </div>
+                    </li>
+                    <li id="li_8">
+                        <label class="description" for="hashtag">Хэштеги </label>
+                        <div>
+                            <input id="hashtag" name="hashtag" class="element text large" type="text" maxlength="255"
+                                   value="${issue != null ? issue.hashtag : ''}" disabled/>
+                        </div>
                     </li>
                 </ul>
             </form>	

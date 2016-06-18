@@ -4,9 +4,10 @@
  */
 package ru.spb.petrk.webissues.issues;
 
-import java.util.Date;
 import ru.spb.petrk.webissues.model.Issue;
 import ru.spb.petrk.webissues.model.User;
+
+import java.util.Date;
 
 /**
  *
@@ -28,7 +29,9 @@ public final class IssueForm {
 
     private Status status;
 
-    private Priority priority;    
+    private Priority priority;
+
+    private String hashtag;
 
     
     public IssueForm() {
@@ -36,10 +39,10 @@ public final class IssueForm {
     }
         
     public IssueForm(Issue issue) {
-        this(issue.getId(), issue.getTitle(), issue.getDescription(), issue.getCreationDate(), issue.getCreator(), issue.getAssignee(), issue.getStatus(), issue.getPriority());
-    }    
+        this(issue.getId(), issue.getTitle(), issue.getDescription(), issue.getCreationDate(), issue.getCreator(), issue.getAssignee(), issue.getStatus(), issue.getPriority(), issue.getHashtag());
+    }
 
-    public IssueForm(Long id, String title, String description, Date creationDate, User creator, User assignee, Status status, Priority priority) {
+    public IssueForm(Long id, String title, String description, Date creationDate, User creator, User assignee, Status status, Priority priority, String hashtag) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -48,6 +51,7 @@ public final class IssueForm {
         this.assignee = assignee;
         this.status = status;
         this.priority = priority;
+        this.hashtag = hashtag;
     }
 
     public Long getId() {
@@ -58,56 +62,64 @@ public final class IssueForm {
         return title;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public User getCreator() {
-        return creator;
-    }
-
-    public User getAssignee() {
-        return assignee;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public Priority getPriority() {
-        return priority;
-    }
-
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public User getCreator() {
+        return creator;
     }
 
     public void setCreator(User creator) {
         this.creator = creator;
     }
 
+    public User getAssignee() {
+        return assignee;
+    }
+
     public void setAssignee(User assignee) {
         this.assignee = assignee;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     public void setStatus(Status status) {
         this.status = status;
     }
 
+    public Priority getPriority() {
+        return priority;
+    }
+
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public String getHashtag() {
+        return hashtag;
+    }
+
+    public void setHashtag(String hashtag) {
+        this.hashtag = hashtag;
     }
     
     public void apply(Issue issue) {
@@ -118,6 +130,7 @@ public final class IssueForm {
         issue.setAssignee(assignee);
         issue.setPriority(priority);
         issue.setStatus(status);
+        issue.setHashtag(hashtag);
     }
     
 }

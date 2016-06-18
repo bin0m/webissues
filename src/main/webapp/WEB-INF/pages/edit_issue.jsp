@@ -6,8 +6,8 @@
 
 <%@page import="ru.spb.petrk.webissues.issues.IssuesSearchForm"%>
 <%@page import="ru.spb.petrk.webissues.utils.Constants"%>
-<%@page import="ru.spb.petrk.webissues.utils.ContentHelperImpl"%>
 <%@page import="ru.spb.petrk.webissues.utils.ContentHelper"%>
+<%@page import="ru.spb.petrk.webissues.utils.ContentHelperImpl" %>
 <%@page import="ru.spb.petrk.webissues.utils.MessageCollector"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -43,7 +43,8 @@
                 <p>
                     <a href="<c:url value = '/app/' />">Главная</a> > 
                     <c:if test="${existingIssue}">
-                        <a href="<c:url value = '/app/search' />?<%= searchForm.toRequestParams() %>">Список заданий</a> > 
+                        <a href="<c:url value = '/app/search' />?<%= searchForm.toRequestParams() %>">Список
+                            заданий</a> >
                     </c:if>
                     <a href="<c:url value = '/app/editIssue' />?id=${issue != null ? issue.id : ''}">${existingIssue ? 'Редактировать' : 'Создать'} задание</a>
                 </p>
@@ -63,7 +64,7 @@
                 
                 <ul >
                     <li id="li_1" >
-                        <label class="description" for="title">Тема </label>
+                        <label class="description" for="login">Тема </label>
                         <div>
                             <input id="login" name="title" class="element text large" type="text" maxlength="255" value="${issue != null ? issue.title : ''}"/> 
                         </div> 
@@ -113,7 +114,14 @@
                                       class="element text large"
                                       rows="5" cols="60" 
                                       type="text" >${issue != null ? issue.description : ''}</textarea>
-                        </div> 
+                        </div>
+                    </li>
+                    <li id="li_6">
+                        <label class="description" for="hashtag">Хэштег </label>
+                        <div>
+                            <input id="hashtag" name="hashtag" class="element text large" type="text" maxlength="255"
+                                   value="${issue != null ? issue.hashtag : ''}"/>
+                        </div>
                     </li>
 
                     <li class="buttons">

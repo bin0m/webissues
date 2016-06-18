@@ -4,21 +4,6 @@
  */
 package ru.spb.petrk.webissues.controller;
 
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +25,17 @@ import ru.spb.petrk.webissues.utils.MessageCollector;
 import ru.spb.petrk.webissues.utils.Severity;
 import ru.spb.petrk.webissues.utils.Utils;
 import ru.spb.petrk.webissues.validators.IssueFormValidator;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
+import java.util.*;
 
 /**
  *
@@ -125,6 +121,7 @@ public class ApplicationController {
                                   @RequestParam Long assignee,
                                   @RequestParam String priority,
                                   @RequestParam String status,
+                                  @RequestParam String hashtag,
                                   Principal principal)
     {
         User visitor = usersRepository.findByLogin(principal.getName());
@@ -146,6 +143,7 @@ public class ApplicationController {
         issueForm.setAssignee(assignee != null ? usersRepository.findOne(assignee) : null);
         issueForm.setPriority(Priority.valueOf(priority));
         issueForm.setStatus(Status.valueOf(status));
+        issueForm.setHashtag(hashtag);
         
         MessageCollector collector = new MessageCollector();           
         IssueFormValidator validator = new IssueFormValidator(visitor, newIssue);
@@ -195,12 +193,12 @@ public class ApplicationController {
     @Transactional
     @RequestMapping(value = {"/app/search"}, method = RequestMethod.GET)   
     public ModelAndView search(HttpServletRequest request,
-                               @RequestParam Long creator, 
+                               @RequestParam Long creator,
                                @RequestParam Long assignee,
                                @RequestParam String title,
                                @RequestParam String priority,
                                @RequestParam String status,
-                               Principal principal) 
+                               Principal principal)
     {
         User visitor = usersRepository.findByLogin(principal.getName());
         
